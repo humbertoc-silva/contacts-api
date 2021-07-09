@@ -45,7 +45,7 @@ paths:
         - $ref: '#/components/parameters/pageNumber'
         - $ref: '#/components/parameters/pageSize'
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
@@ -69,9 +69,31 @@ paths:
                       "labels": ["software", "api"],
                       "active": true
                     }
-                  ]
+                  ],
+                  "links": {
+                    "first": "https://example.com/contacts/v1/contacts?pageNumber=0&pageSize=10",
+                    "last": "https://example.com/contacts/v1/contacts?pageNumber=9&pageSize=10",
+                    "prev": "https://example.com/contacts/v1/contacts?pageNumber=0&pageSize=10",
+                    "next": "https://example.com/contacts/v1/contacts?pageNumber=2&pageSize=10"
+                  }
                 }
-    
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
+
     post:
       tags:
         - contacts
@@ -358,6 +380,32 @@ components:
       required:
         - data
         - links
+  
+  responses:
+    '204':
+      description: No Content
+    '400':
+      description: Bad Request
+    '401':
+      description: Unauthorized
+    '403':
+      description: Forbidden
+    '404':
+      description: Not Found
+    '405':
+      description: Method Not Allowed
+    '406':
+      description: Not Acceptable
+    '409':
+      description: Conflict
+    '415':
+      description: Unsupported Media Type
+    '422':
+      description: Unprocessable Entity
+    '500':
+      description: Internal Server Error
+    '503':
+      description: Service Unavailable
   
   parameters:
     pageNumber:
