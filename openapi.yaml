@@ -2,17 +2,16 @@ openapi: 3.1.0
 info:
   title: Contacts API
   summary: API used to manage contacts.
-  description: This API is ...
+  description: ...
   termsOfService: https://example.com/terms
   contact:
     name: Humberto Corrêa da Silva
     url: https://github.com/humbertoc-silva
-    email: humberto@example.com
+    email: humbertoc-silva@example.com
   license:
     name: MIT
     url: https://github.com/humbertoc-silva/contacts-api/blob/main/LICENSE
   version: 1.0.0
-jsonSchemaDialect: https://spec.openapis.org/oas/3.1/dialect/base
 servers:
   - url: https://localhost:8443/contacts/v1
     description: Local server.
@@ -31,7 +30,6 @@ paths:
   /contacts:
     summary: ...
     description: ...
-    
     get:
       tags:
         - contacts
@@ -50,7 +48,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contacts'
+                $ref: '#/components/schemas/contactsGetResponseContent'
               example: |
                 {
                   "data": [
@@ -58,23 +56,24 @@ paths:
                       "id": 1,
                       "firstName": "Humberto",
                       "lastName": "Corrêa da Silva",
-                      "nickname": "humbertocs",
+                      "nickname": "humbertoc-silva",
                       "birthday": "1986-05-30",
                       "gender": "masculine",
                       "company": "Example",
                       "department": "Engineering",
                       "title": "Software Engineer",
-                      "website": "https://example.com/profile/humbertocs",
+                      "website": "https://example.com/profile/humbertoc-silva",
                       "notes": "A brief description about me.",
                       "labels": ["software", "api"],
                       "active": true
                     }
                   ],
                   "links": {
+                    "self": "https://example.com/contacts/v1/contacts?pageNumber=0&pageSize=10",
                     "first": "https://example.com/contacts/v1/contacts?pageNumber=0&pageSize=10",
-                    "last": "https://example.com/contacts/v1/contacts?pageNumber=9&pageSize=10",
                     "prev": "https://example.com/contacts/v1/contacts?pageNumber=0&pageSize=10",
-                    "next": "https://example.com/contacts/v1/contacts?pageNumber=2&pageSize=10"
+                    "next": "https://example.com/contacts/v1/contacts?pageNumber=1&pageSize=10",
+                    "last": "https://example.com/contacts/v1/contacts?pageNumber=9&pageSize=10"
                   }
                 }
         '400':
@@ -93,7 +92,6 @@ paths:
           $ref: '#/components/responses/500'
         '503':
           $ref: '#/components/responses/503'
-
     post:
       tags:
         - contacts
@@ -103,11 +101,80 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/post
       operationId: postContacts
-  
+      requestBody:
+        description: ...
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contactsPostRequestBody'
+            example: |
+              {
+                "data": {
+                  "firstName": "Humberto",
+                  "lastName": "Corrêa da Silva",
+                  "nickname": "humbertoc-silva",
+                  "birthday": "1986-05-30",
+                  "gender": "masculine",
+                  "company": "Example",
+                  "department": "Engineering",
+                  "title": "Software Engineer",
+                  "website": "https://example.com/profile/humbertoc-silva",
+                  "notes": "A brief description about me.",
+                  "labels": ["software", "api"],
+                  "active": true
+                }
+              }
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            location:
+              $ref: '#/components/headers/location'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactsPostResponseContent'
+              example: |
+                {
+                  "data": {
+                    "id": 1,
+                    "firstName": "Humberto",
+                    "lastName": "Corrêa da Silva",
+                    "nickname": "humbertoc-silva",
+                    "birthday": "1986-05-30",
+                    "gender": "masculine",
+                    "company": "Example",
+                    "department": "Engineering",
+                    "title": "Software Engineer",
+                    "website": "https://example.com/profile/humbertoc-silva",
+                    "notes": "A brief description about me.",
+                    "labels": ["software", "api"],
+                    "active": true
+                  },
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '415':
+          $ref: '#/components/responses/415'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
   /contacts/{contactId}:
     summary: ...
     description: ...
-    
     get:
       tags:
         - contacts
@@ -117,7 +184,6 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/get
       operationId: getContact
-    
     put:
       tags:
         - contacts
@@ -127,7 +193,6 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/put
       operationId: putContact
-    
     delete:
       tags:
         - contacts
@@ -137,7 +202,6 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/delete
       operationId: deleteContact
-
     patch:
       tags:
         - contacts
@@ -147,14 +211,11 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/patch
       operationId: patchContact
-  
     parameters:
       - $ref: '#/components/parameters/contactId'
-
   /contacts/{contactId}/phones:
     summary: ...
     description: ...
-    
     get:
       tags:
         - contact-phones
@@ -164,7 +225,6 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/phones/get
       operationId: getContactPhones
-    
     post:
       tags:
         - contact-phones
@@ -174,14 +234,11 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/phones/post
       operationId: postContactPhones
-  
     parameters:
       - $ref: '#/components/parameters/contactId'
-    
   /contacts/{contactId}/phones/{phoneId}:
     summary: ...
     description: ...
-    
     get:
       tags:
         - contact-phones
@@ -191,7 +248,6 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/phones/{phoneId}/get
       operationId: getContactPhone
-    
     put:
       tags:
         - contact-phones
@@ -201,7 +257,6 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/phones/{phoneId}/put
       operationId: putContactPhone
-    
     delete:
       tags:
         - contact-phones
@@ -211,7 +266,6 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/phones/{phoneId}/delete
       operationId: deleteContactPhone
-
     patch:
       tags:
         - contact-phones
@@ -221,15 +275,12 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/phones/{phoneId}/patch
       operationId: patchContactPhone
-  
     parameters:
       - $ref: '#/components/parameters/contactId'
       - $ref: '#/components/parameters/phoneId'
-
   /contacts/{contactId}/emails:
     summary: ...
     description: ...
-    
     get:
       tags:
         - contact-email
@@ -239,7 +290,6 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/emails/get
       operationId: getContactEmails
-    
     post:
       tags:
         - contact-email
@@ -249,14 +299,11 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/emails/post
       operationId: postContactEmails
-  
     parameters:
       - $ref: '#/components/parameters/contactId'
-
   /contacts/{contactId}/emails/{emailId}:
     summary: ...
     description: ...
-    
     get:
       tags:
         - contact-email
@@ -266,7 +313,6 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/emails/{emailId}/get
       operationId: getContactEmail
-    
     put:
       tags:
         - contact-email
@@ -276,7 +322,6 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/emails/{emailId}/put
       operationId: putContactEmail
-    
     delete:
       tags:
         - contact-email
@@ -286,7 +331,6 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/emails/{emailId}/delete
       operationId: deleteContactEmail
-    
     patch:
       tags:
         - contact-email
@@ -296,40 +340,63 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/emails/{emailId}/patch
       operationId: patchContactEmail
-    
     parameters:
       - $ref: '#/components/parameters/contactId'
       - $ref: '#/components/parameters/emailId'
-
 components:
   schemas:
     id:
+      title: ...
+      description: ...
       type: integer
       format: int64
-
+    readOnlyId:
+      title: ...
+      description: ...
+      type: integer
+      format: int64
+      readOnly: true
     uri:
+      title: ...
+      description: ...
       type: string
       format: uri
-    
-    paginationLinks:
+    links:
+      title: ...
+      description: ...
       type: object
       properties:
-        first:
+        self:
           $ref: '#/components/schemas/uri'
-        last:
+        first:
           $ref: '#/components/schemas/uri'
         prev:
           $ref: '#/components/schemas/uri'
         next:
           $ref: '#/components/schemas/uri'
-
+        last:
+          $ref: '#/components/schemas/uri' 
+    pageNumber:
+      title: ...
+      description: ...
+      type: integer
+      format: int32
+    pageSize:
+      title: ...
+      description: ...
+      type: integer
+      format: int32
+      enum:
+        - 10
+        - 50
+        - 100
     contact:
+      title: ...
+      description: ...
       type: object
       properties:
         id:
-          type: integer
-          format: int64
-          readOnly: true
+          $ref: '#/components/schemas/readOnlyId'
         firstName:
           type: string
         lastName:
@@ -360,6 +427,8 @@ components:
           type: array
           items:
             type: string
+          minItems: 1
+          uniqueItems: true
         active:
           type: boolean
       required:
@@ -367,8 +436,9 @@ components:
         - lastName
         - birthday
         - gender
-
-    contacts:
+    contactsGetResponseContent:
+      title: ...
+      description: ...
       type: object
       properties:
         data:
@@ -376,12 +446,34 @@ components:
           items:
             $ref: '#/components/schemas/contact'
         links:
-          $ref: '#/components/schemas/paginationLinks'    
+          $ref: '#/components/schemas/links'
       required:
         - data
         - links
-  
+    contactsPostRequestBody:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/contact'
+      required:
+        - data
+    contactsPostResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/contact'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
   responses:
+    '202':
+      description: Accepted
     '204':
       description: No Content
     '400':
@@ -406,32 +498,21 @@ components:
       description: Internal Server Error
     '503':
       description: Service Unavailable
-  
   parameters:
     pageNumber:
       name: pageNumber
       in: query
       description: ...
       schema:
-        type: integer
-        format: int32
-        default: 0
+        $ref: '#/components/schemas/pageNumber'
       example: 0
-    
     pageSize:
       name: pageSize
       in: query
       description: ...
       schema:
-        type: integer
-        format: int32
-        enum:
-          - 10
-          - 50
-          - 100
-        default: 10
+        $ref: '#/components/schemas/pageSize'
       example: 10
-    
     contactId:
       name: contactId
       in: path
@@ -440,7 +521,6 @@ components:
       schema:
         $ref: '#/components/schemas/id'
       example: 1
-    
     phoneId:
       name: phoneId
       in: path
@@ -449,7 +529,6 @@ components:
       schema:
         $ref: '#/components/schemas/id'
       example: 1
-    
     emailId:
       name: phoneId
       in: path
@@ -458,3 +537,9 @@ components:
       schema:
         $ref: '#/components/schemas/id'
       example: 1
+  headers:
+    location:
+      description: ...
+      required: true
+      schema:
+        $ref: '#/components/schemas/uri'
