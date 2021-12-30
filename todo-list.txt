@@ -1,0 +1,4 @@
+TODO list:
+
+1 - Os schemas estão se repetindo, encontrar um jeito de evitar a duplicação de código.
+2 - O schema contact deve ter propriedades required para as operações POST e PUT mas não para PATCH.
