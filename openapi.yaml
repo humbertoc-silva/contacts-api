@@ -82,12 +82,12 @@ paths:
           $ref: '#/components/responses/401'
         '403':
           $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
         '406':
           $ref: '#/components/responses/406'
-        '415':
-          $ref: '#/components/responses/415'
         '500':
           $ref: '#/components/responses/500'
         '503':
@@ -168,6 +168,8 @@ paths:
           $ref: '#/components/responses/406'
         '415':
           $ref: '#/components/responses/415'
+        '422':
+          $ref: '#/components/responses/422'
         '500':
           $ref: '#/components/responses/500'
         '503':
@@ -184,6 +186,52 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/get
       operationId: getContact
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactGetResponseContent'
+              example: |
+                {
+                  "data": {
+                    {
+                      "id": 1,
+                      "firstName": "Humberto",
+                      "lastName": "Corrêa da Silva",
+                      "nickname": "humbertoc-silva",
+                      "birthday": "1986-05-30",
+                      "gender": "masculine",
+                      "company": "Example",
+                      "department": "Engineering",
+                      "title": "Software Engineer",
+                      "website": "https://example.com/profile/humbertoc-silva",
+                      "notes": "A brief description about me.",
+                      "labels": ["software", "api"],
+                      "active": true
+                    }
+                  },
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     put:
       tags:
         - contacts
@@ -193,6 +241,80 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/put
       operationId: putContact
+      requestBody:
+        description: ...
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contactPutRequestBody'
+            example: |
+              {
+                "data": {
+                  "firstName": "Humberto",
+                  "lastName": "Corrêa da Silva",
+                  "nickname": "humbertoc-silva",
+                  "birthday": "1986-05-30",
+                  "gender": "masculine",
+                  "company": "Example",
+                  "department": "Engineering",
+                  "title": "Software Engineer",
+                  "website": "https://example.com/profile/humbertoc-silva",
+                  "notes": "A brief description about me.",
+                  "labels": ["software", "api"],
+                  "active": true
+                }
+              }
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactPutResponseContent'
+              example: |
+                {
+                  "data": {
+                    "id": 1,
+                    "firstName": "Humberto",
+                    "lastName": "Corrêa da Silva",
+                    "nickname": "humbertoc-silva",
+                    "birthday": "1986-05-30",
+                    "gender": "masculine",
+                    "company": "Example",
+                    "department": "Engineering",
+                    "title": "Software Engineer",
+                    "website": "https://example.com/profile/humbertoc-silva",
+                    "notes": "A brief description about me.",
+                    "labels": ["software", "api"],
+                    "active": true
+                  },
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '409':
+          $ref: '#/components/responses/409'
+        '415':
+          $ref: '#/components/responses/415'
+        '422':
+          $ref: '#/components/responses/422'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     delete:
       tags:
         - contacts
@@ -202,6 +324,25 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/delete
       operationId: deleteContact
+      responses:
+        '204':
+          $ref: '#/components/responses/204'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     patch:
       tags:
         - contacts
@@ -211,6 +352,69 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/patch
       operationId: patchContact
+      requestBody:
+        description: ...
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contactPatchRequestBody'
+            example: |
+              {
+                "data": {
+                  "firstName": "Humberto"
+                }
+              }
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactPatchResponseContent'
+              example: |
+                {
+                  "data": {
+                    "id": 1,
+                    "firstName": "Humberto",
+                    "lastName": "Corrêa da Silva",
+                    "nickname": "humbertoc-silva",
+                    "birthday": "1986-05-30",
+                    "gender": "masculine",
+                    "company": "Example",
+                    "department": "Engineering",
+                    "title": "Software Engineer",
+                    "website": "https://example.com/profile/humbertoc-silva",
+                    "notes": "A brief description about me.",
+                    "labels": ["software", "api"],
+                    "active": true
+                  },
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '409':
+          $ref: '#/components/responses/409'
+        '415':
+          $ref: '#/components/responses/415'
+        '422':
+          $ref: '#/components/responses/422'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     parameters:
       - $ref: '#/components/parameters/contactId'
   /contacts/{contactId}/phones:
@@ -431,11 +635,12 @@ components:
           uniqueItems: true
         active:
           type: boolean
-      required:
-        - firstName
-        - lastName
-        - birthday
-        - gender
+      # TODO: Os campos são obrigatórios somente no POST e PUT, no PATCH não são.
+      # required:
+      #   - firstName
+      #   - lastName
+      #   - birthday
+      #   - gender
     contactsGetResponseContent:
       title: ...
       description: ...
@@ -460,6 +665,60 @@ components:
       required:
         - data
     contactsPostResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/contact'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
+    contactGetResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/contact'
+        links:
+          $ref: '#/components/schemas/links'
+        required:
+          - data
+          - links
+    contactPutRequestBody:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/contact'
+      required:
+        - data
+    contactPutResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/contact'
+        links:
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
+    contactPatchRequestBody:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/contact'
+      required:
+        - data
+    contactPatchResponseContent:
       title: ...
       description: ...
       type: object
