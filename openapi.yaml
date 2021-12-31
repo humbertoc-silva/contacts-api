@@ -65,7 +65,7 @@ paths:
                       "website": "https://example.com/profile/humbertoc-silva",
                       "notes": "A brief description about me.",
                       "labels": ["software", "api"],
-                      "active": true
+                      "favorite": true
                     }
                   ],
                   "links": {
@@ -121,7 +121,7 @@ paths:
                   "website": "https://example.com/profile/humbertoc-silva",
                   "notes": "A brief description about me.",
                   "labels": ["software", "api"],
-                  "active": true
+                  "favorite": true
                 }
               }
         required: true
@@ -150,7 +150,7 @@ paths:
                     "website": "https://example.com/profile/humbertoc-silva",
                     "notes": "A brief description about me.",
                     "labels": ["software", "api"],
-                    "active": true
+                    "favorite": true
                   },
                   "links": {
                     "self": "https://example.com/contacts/v1/contacts/1"
@@ -209,7 +209,7 @@ paths:
                       "website": "https://example.com/profile/humbertoc-silva",
                       "notes": "A brief description about me.",
                       "labels": ["software", "api"],
-                      "active": true
+                      "favorite": true
                     }
                   },
                   "links": {
@@ -261,7 +261,7 @@ paths:
                   "website": "https://example.com/profile/humbertoc-silva",
                   "notes": "A brief description about me.",
                   "labels": ["software", "api"],
-                  "active": true
+                  "favorite": true
                 }
               }
         required: true
@@ -287,7 +287,7 @@ paths:
                     "website": "https://example.com/profile/humbertoc-silva",
                     "notes": "A brief description about me.",
                     "labels": ["software", "api"],
-                    "active": true
+                    "favorite": true
                   },
                   "links": {
                     "self": "https://example.com/contacts/v1/contacts/1"
@@ -387,7 +387,7 @@ paths:
                     "website": "https://example.com/profile/humbertoc-silva",
                     "notes": "A brief description about me.",
                     "labels": ["software", "api"],
-                    "active": true
+                    "favorite": true
                   },
                   "links": {
                     "self": "https://example.com/contacts/v1/contacts/1"
@@ -554,12 +554,6 @@ components:
       description: ...
       type: integer
       format: int64
-    readOnlyId:
-      title: ...
-      description: ...
-      type: integer
-      format: int64
-      readOnly: true
     uri:
       title: ...
       description: ...
@@ -571,14 +565,24 @@ components:
       type: object
       properties:
         self:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/uri'
         first:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/uri'
         prev:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/uri'
         next:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/uri'
         last:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/uri' 
     pageNumber:
       title: ...
@@ -600,40 +604,68 @@ components:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/readOnlyId'
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/id'
+          readOnly: true
         firstName:
+          title: ...
+          description: ...
           type: string
         lastName:
+          title: ...
+          description: ...
           type: string
         nickname:
+          title: ...
+          description: ...
           type: string
         birthday:
+          title: ...
+          description: ...
           type: string
           format: date
         gender:
+          title: ...
+          description: ...
           type: string
           enum:
-            - masculine
-            - feminine
+            - Female
+            - Male
+            - Other
         company:
+          title: ...
+          description: ...
           type: string
         department:
+          title: ...
+          description: ...
           type: string
         title:
+          title: ...
+          description: ...
           type: string
         website:
+          title: ...
+          description: ...
           type: string
           format: uri
         notes:
+          title: ...
+          description: ...
           type: string
           maxLength: 250
         labels:
+          title: ...
+          description: ...
           type: array
           items:
             type: string
           minItems: 1
           uniqueItems: true
-        active:
+        favorite:
+          title: ...
+          description: ...
           type: boolean
       # TODO: Os campos são obrigatórios somente no POST e PUT, no PATCH não são.
       # required:
@@ -647,10 +679,14 @@ components:
       type: object
       properties:
         data:
+          title: ...
+          description: ...
           type: array
           items:
             $ref: '#/components/schemas/contact'
         links:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/links'
       required:
         - data
@@ -661,6 +697,8 @@ components:
       type: object
       properties:
         data:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/contact'
       required:
         - data
@@ -670,8 +708,12 @@ components:
       type: object
       properties:
         data:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/contact'
         links:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/links'
       required:
         - data
@@ -682,8 +724,12 @@ components:
       type: object
       properties:
         data:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/contact'
         links:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/links'
         required:
           - data
@@ -694,6 +740,8 @@ components:
       type: object
       properties:
         data:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/contact'
       required:
         - data
@@ -703,8 +751,12 @@ components:
       type: object
       properties:
         data:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/contact'
         links:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/links'
       required:
         - data
@@ -715,6 +767,8 @@ components:
       type: object
       properties:
         data:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/contact'
       required:
         - data
@@ -724,12 +778,44 @@ components:
       type: object
       properties:
         data:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/contact'
         links:
+          title: ...
+          description: ...
           $ref: '#/components/schemas/links'
       required:
         - data
         - links
+    phone:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        id:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/id'
+          readOnly: true
+        contactId:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/id'
+        phone:
+          title: ...
+          description: ...
+          type: string
+        label:
+          title: ...
+          description: ...
+          type: string
+          enum:
+            - Home
+            - Main
+            - Mobile
+            - Other
+            - Work
   responses:
     '202':
       description: Accepted
