@@ -69,11 +69,11 @@ paths:
                     }
                   ],
                   "links": {
-                    "self": "https://example.com/contacts/v1/contacts?pageNumber=0&pageSize=10",
-                    "first": "https://example.com/contacts/v1/contacts?pageNumber=0&pageSize=10",
-                    "prev": "https://example.com/contacts/v1/contacts?pageNumber=0&pageSize=10",
-                    "next": "https://example.com/contacts/v1/contacts?pageNumber=1&pageSize=10",
-                    "last": "https://example.com/contacts/v1/contacts?pageNumber=9&pageSize=10"
+                    "self": "https://example.com/contacts/v1/contacts?page[number]=0&page[size]=10",
+                    "first": "https://example.com/contacts/v1/contacts?page[number]=0&page[size]=10",
+                    "prev": "https://example.com/contacts/v1/contacts?page[number]=0&page[size]=10",
+                    "next": "https://example.com/contacts/v1/contacts?page[number]=1&page[size]=10",
+                    "last": "https://example.com/contacts/v1/contacts?page[number]=9&page[size]=10"
                   }
                 }
         '400':
@@ -337,8 +337,6 @@ paths:
           $ref: '#/components/responses/404'
         '405':
           $ref: '#/components/responses/405'
-        '406':
-          $ref: '#/components/responses/406'
         '500':
           $ref: '#/components/responses/500'
         '503':
@@ -423,12 +421,56 @@ paths:
     get:
       tags:
         - contact-phones
-      summary: ...
+      summary: ...l
       description: ...
       externalDocs:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/phones/get
       operationId: getContactPhones
+      parameters:
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactPhonesGetResponseContent'
+              example: |
+                {
+                  "data": [
+                    {
+                      "id": 1,
+                      "contactId": 1,
+                      "phone": "5511999999999",
+                      "label": "Mobile"
+                    }
+                  ],
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1/phones?page[number]=0&page[size]=10",
+                    "first": "https://example.com/contacts/v1/contacts/1/phones?page[number]=0&page[size]=10",
+                    "prev": "https://example.com/contacts/v1/contacts/1/phones?page[number]=0&page[size]=10",
+                    "next": "https://example.com/contacts/v1/contacts/1/phones?page[number]=1&page[size]=10",
+                    "last": "https://example.com/contacts/v1/contacts/1/phones?page[number]=9&page[size]=10"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     post:
       tags:
         - contact-phones
@@ -438,6 +480,61 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/phones/post
       operationId: postContactPhones
+      requestBody:
+        description: ...
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contactPhonesPostRequestBody'
+            example: |
+              {
+                "data": {
+                    "contactId": 1,
+                    "phone": "5511999999999",
+                    "label": "Mobile"
+                  }
+              }
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            location:
+              $ref: '#/components/headers/location'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactPhonesPostResponseContent'
+              example: |
+                {
+                  "data": {
+                    "id": 1,
+                    "contactId": 1,
+                    "phone": "5511999999999",
+                    "label": "Mobile"
+                  },
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1/phones/1"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '415':
+          $ref: '#/components/responses/415'
+        '422':
+          $ref: '#/components/responses/422'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     parameters:
       - $ref: '#/components/parameters/contactId'
   /contacts/{contactId}/phones/{phoneId}:
@@ -452,6 +549,41 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/phones/{phoneId}/get
       operationId: getContactPhone
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactPhoneGetResponseContent'
+              example: |
+                {
+                  "data": {
+                    "id": 1,
+                    "contactId": 1,
+                    "phone": "5511999999999",
+                    "label": "Mobile"
+                  },
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1/phones/1"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     put:
       tags:
         - contact-phones
@@ -461,6 +593,62 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/phones/{phoneId}/put
       operationId: putContactPhone
+      requestBody:
+        description: ...
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contactPhonePutRequestBody'
+            example: |
+              {
+                "data": {
+                  "contactId": 1,
+                  "phone": "5511999999999",
+                  "label": "Mobile"
+                }
+              }
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactPhonePutResponseContent'
+              example: |
+                {
+                  "data": {
+                    "id": 1,
+                    "contactId": 1,
+                    "phone": "5511999999999",
+                    "label": "Mobile"
+                  },
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1/phones/1"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '409':
+          $ref: '#/components/responses/409'
+        '415':
+          $ref: '#/components/responses/415'
+        '422':
+          $ref: '#/components/responses/422'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     delete:
       tags:
         - contact-phones
@@ -470,6 +658,23 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/phones/{phoneId}/delete
       operationId: deleteContactPhone
+      responses:
+        '204':
+          $ref: '#/components/responses/204'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     patch:
       tags:
         - contact-phones
@@ -731,9 +936,9 @@ components:
           title: ...
           description: ...
           $ref: '#/components/schemas/links'
-        required:
-          - data
-          - links
+      required:
+        - data
+        - links
     contactPutRequestBody:
       title: ...
       description: ...
@@ -816,6 +1021,94 @@ components:
             - Mobile
             - Other
             - Work
+    contactPhonesGetResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          type: array
+          items:
+            $ref: '#/components/schemas/phone'
+        links:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
+    contactPhonesPostRequestBody:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/phone'
+      required:
+        - data
+    contactPhonesPostResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/phone'
+        links:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
+    contactPhoneGetResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/phone'
+        links:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
+    contactPhonePutRequestBody:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/phone'
+      required:
+        - data
+    contactPhonePutResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/phone'
+        links:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
   responses:
     '202':
       description: Accepted
@@ -845,14 +1138,14 @@ components:
       description: Service Unavailable
   parameters:
     pageNumber:
-      name: pageNumber
+      name: page[number]
       in: query
       description: ...
       schema:
         $ref: '#/components/schemas/pageNumber'
       example: 0
     pageSize:
-      name: pageSize
+      name: page[size]
       in: query
       description: ...
       schema:
@@ -875,7 +1168,7 @@ components:
         $ref: '#/components/schemas/id'
       example: 1
     emailId:
-      name: phoneId
+      name: emailId
       in: path
       description: ...
       required: true
