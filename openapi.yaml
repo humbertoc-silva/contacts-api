@@ -421,7 +421,7 @@ paths:
     get:
       tags:
         - contact-phones
-      summary: ...l
+      summary: ...
       description: ...
       externalDocs:
         description: ...
@@ -684,6 +684,60 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/phones/{phoneId}/patch
       operationId: patchContactPhone
+      requestBody:
+        description: ...
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contactPhonePatchRequestBody'
+            example: |
+              {
+                "data": {
+                  "phone": "5511999999999",
+                }
+              }
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactPhonePatchResponseContent'
+              example: |
+                {
+                  "data": {
+                    "id": 1,
+                    "contactId": 1,
+                    "phone": "5511999999999",
+                    "label": "Mobile"
+                  },
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1/phones/1"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '409':
+          $ref: '#/components/responses/409'
+        '415':
+          $ref: '#/components/responses/415'
+        '422':
+          $ref: '#/components/responses/422'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     parameters:
       - $ref: '#/components/parameters/contactId'
       - $ref: '#/components/parameters/phoneId'
@@ -1094,6 +1148,33 @@ components:
       required:
         - data
     contactPhonePutResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/phone'
+        links:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
+    contactPhonePatchRequestBody:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/phone'
+      required:
+        - data
+    contactPhonePatchResponseContent:
       title: ...
       description: ...
       type: object
