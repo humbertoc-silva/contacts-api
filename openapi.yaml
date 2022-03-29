@@ -753,6 +753,50 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/emails/get
       operationId: getContactEmails
+      parameters:
+        - $ref: '#/components/parameters/pageNumber'
+        - $ref: '#/components/parameters/pageSize'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactEmailsGetResponseContent'
+              example: |
+                {
+                  "data": [
+                    {
+                      "id": 1,
+                      "contactId": 1,
+                      "email": "humbertoc-silva@example.com",
+                      "label": "Personal"
+                    }
+                  ],
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1/emails?page[number]=0&page[size]=10",
+                    "first": "https://example.com/contacts/v1/contacts/1/emails?page[number]=0&page[size]=10",
+                    "prev": "https://example.com/contacts/v1/contacts/1/emails?page[number]=0&page[size]=10",
+                    "next": "https://example.com/contacts/v1/contacts/1/emails?page[number]=1&page[size]=10",
+                    "last": "https://example.com/contacts/v1/contacts/1/emails?page[number]=9&page[size]=10"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     post:
       tags:
         - contact-email
@@ -762,6 +806,61 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/emails/post
       operationId: postContactEmails
+      requestBody:
+        description: ...
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contactEmailsPostRequestBody'
+            example: |
+              {
+                "data": {
+                  "contactId": 1,
+                  "email": "humbertoc-silva@example.com",
+                  "label": "Personal"
+                }
+              }
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            location:
+              $ref: '#/components/headers/location'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactEmailsPostResponseContent'
+              example: |
+                {
+                  "data": {
+                    "id": 1,
+                    "contactId": 1,
+                    "email": "humbertoc-silva@example.com",
+                    "label": "Personal"
+                  },
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1/emails/1"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '415':
+          $ref: '#/components/responses/415'
+        '422':
+          $ref: '#/components/responses/422'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     parameters:
       - $ref: '#/components/parameters/contactId'
   /contacts/{contactId}/emails/{emailId}:
@@ -1183,6 +1282,149 @@ components:
           title: ...
           description: ...
           $ref: '#/components/schemas/phone'
+        links:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
+    email:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        id: 
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/id'
+          readOnly: true
+        contactId:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/id'
+        email:
+          title: ...
+          description: ...
+          type: string
+          format: email
+        label:
+          title: ...
+          description: ...
+          type: string
+          enum:
+            - Main
+            - Other
+            - Personal
+            - Work
+    contactEmailsGetResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          type: array
+          items:
+            $ref: '#/components/schemas/email'
+        links:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
+    contactEmailsPostRequestBody:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/email'
+      required:
+        - data
+    contactEmailsPostResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/email'
+        links:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
+    contactEmailGetResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/email'
+        links:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
+    contactEmailPutRequestBody:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/email'
+      required:
+        - data
+    contactEmailPutResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/email'
+        links:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/links'
+      required:
+        - data
+        - links
+    contactEmailPatchRequestBody:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/email'
+      required:
+        - data
+    contactEmailPatchResponseContent:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        data:
+          title: ...
+          description: ...
+          $ref: '#/components/schemas/email'
         links:
           title: ...
           description: ...
