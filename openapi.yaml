@@ -58,7 +58,7 @@ paths:
                       "lastName": "Corrêa da Silva",
                       "nickname": "humbertoc-silva",
                       "birthday": "1986-05-30",
-                      "gender": "masculine",
+                      "gender": "Male",
                       "company": "Example",
                       "department": "Engineering",
                       "title": "Software Engineer",
@@ -114,7 +114,7 @@ paths:
                   "lastName": "Corrêa da Silva",
                   "nickname": "humbertoc-silva",
                   "birthday": "1986-05-30",
-                  "gender": "masculine",
+                  "gender": "Male",
                   "company": "Example",
                   "department": "Engineering",
                   "title": "Software Engineer",
@@ -143,7 +143,7 @@ paths:
                     "lastName": "Corrêa da Silva",
                     "nickname": "humbertoc-silva",
                     "birthday": "1986-05-30",
-                    "gender": "masculine",
+                    "gender": "Male",
                     "company": "Example",
                     "department": "Engineering",
                     "title": "Software Engineer",
@@ -202,7 +202,7 @@ paths:
                       "lastName": "Corrêa da Silva",
                       "nickname": "humbertoc-silva",
                       "birthday": "1986-05-30",
-                      "gender": "masculine",
+                      "gender": "Male",
                       "company": "Example",
                       "department": "Engineering",
                       "title": "Software Engineer",
@@ -254,7 +254,7 @@ paths:
                   "lastName": "Corrêa da Silva",
                   "nickname": "humbertoc-silva",
                   "birthday": "1986-05-30",
-                  "gender": "masculine",
+                  "gender": "Male",
                   "company": "Example",
                   "department": "Engineering",
                   "title": "Software Engineer",
@@ -280,7 +280,7 @@ paths:
                     "lastName": "Corrêa da Silva",
                     "nickname": "humbertoc-silva",
                     "birthday": "1986-05-30",
-                    "gender": "masculine",
+                    "gender": "Male",
                     "company": "Example",
                     "department": "Engineering",
                     "title": "Software Engineer",
@@ -378,7 +378,7 @@ paths:
                     "lastName": "Corrêa da Silva",
                     "nickname": "humbertoc-silva",
                     "birthday": "1986-05-30",
-                    "gender": "masculine",
+                    "gender": "Male",
                     "company": "Example",
                     "department": "Engineering",
                     "title": "Software Engineer",
@@ -489,7 +489,6 @@ paths:
             example: |
               {
                 "data": {
-                    "contactId": 1,
                     "phone": "5511999999999",
                     "label": "Mobile"
                   }
@@ -602,7 +601,6 @@ paths:
             example: |
               {
                 "data": {
-                  "contactId": 1,
                   "phone": "5511999999999",
                   "label": "Mobile"
                 }
@@ -693,7 +691,7 @@ paths:
             example: |
               {
                 "data": {
-                  "phone": "5511999999999",
+                  "phone": "5511999999999"
                 }
               }
         required: true
@@ -815,7 +813,6 @@ paths:
             example: |
               {
                 "data": {
-                  "contactId": 1,
                   "email": "humbertoc-silva@example.com",
                   "label": "Personal"
                 }
@@ -875,6 +872,41 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/emails/{emailId}/get
       operationId: getContactEmail
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactEmailGetResponseContent'
+              example: |
+                {
+                  "data": {
+                    "id": 1,
+                    "contactId": 1,
+                    "email": "humbertoc-silva@example.com",
+                    "label": "Personal"
+                  },
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1/emails/1"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     put:
       tags:
         - contact-email
@@ -884,6 +916,61 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/emails/{emailId}/put
       operationId: putContactEmail
+      requestBody:
+        description: ...
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contactEmailPutRequestBody'
+            example: |
+              {
+                "data": {
+                  "email": "humbertoc-silva@example.com",
+                  "label": "Personal"
+                }
+              }
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactEmailPutResponseContent'
+              example: |
+                {
+                  "data": {
+                    "id": 1,
+                    "contactId": 1,
+                    "email": "humbertoc-silva@example.com",
+                    "label": "Personal"
+                  },
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1/emails/1"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '409':
+          $ref: '#/components/responses/409'
+        '415':
+          $ref: '#/components/responses/415'
+        '422':
+          $ref: '#/components/responses/422'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     delete:
       tags:
         - contact-email
@@ -893,6 +980,23 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/emails/{emailId}/delete
       operationId: deleteContactEmail
+      responses:
+        '204':
+          $ref: '#/components/responses/204'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     patch:
       tags:
         - contact-email
@@ -902,6 +1006,60 @@ paths:
         description: ...
         url: https://example.com/docs/contacts/v1/contacts/{contactId}/emails/{emailId}/patch
       operationId: patchContactEmail
+      requestBody:
+        description: ...
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contactEmailPatchRequestBody'
+            example: |
+              {
+                "data": {
+                  "email": "humbertoc-silva@example.com"
+                }
+              }
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contactEmailPatchResponseContent'
+              example: |
+                {
+                  "data": {
+                    "id": 1,
+                    "contactId": 1,
+                    "email": "humbertoc-silva@example.com",
+                    "label": "Personal"
+                  },
+                  "links": {
+                    "self": "https://example.com/contacts/v1/contacts/1/emails/1"
+                  }
+                }
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '405':
+          $ref: '#/components/responses/405'
+        '406':
+          $ref: '#/components/responses/406'
+        '409':
+          $ref: '#/components/responses/409'
+        '415':
+          $ref: '#/components/responses/415'
+        '422':
+          $ref: '#/components/responses/422'
+        '500':
+          $ref: '#/components/responses/500'
+        '503':
+          $ref: '#/components/responses/503'
     parameters:
       - $ref: '#/components/parameters/contactId'
       - $ref: '#/components/parameters/emailId'
@@ -941,7 +1099,7 @@ components:
         last:
           title: ...
           description: ...
-          $ref: '#/components/schemas/uri' 
+          $ref: '#/components/schemas/uri'
     pageNumber:
       title: ...
       description: ...
@@ -990,7 +1148,6 @@ components:
           enum:
             - Female
             - Male
-            - Other
         company:
           title: ...
           description: ...
@@ -1025,13 +1182,7 @@ components:
           title: ...
           description: ...
           type: boolean
-      # TODO: Os campos são obrigatórios somente no POST e PUT, no PATCH não são.
-      # required:
-      #   - firstName
-      #   - lastName
-      #   - birthday
-      #   - gender
-    contactsGetResponseContent:
+    contactsGetResponseBody:
       title: ...
       description: ...
       type: object
@@ -1060,7 +1211,7 @@ components:
           $ref: '#/components/schemas/contact'
       required:
         - data
-    contactsPostResponseContent:
+    contactsPostResponseBody:
       title: ...
       description: ...
       type: object
@@ -1076,7 +1227,7 @@ components:
       required:
         - data
         - links
-    contactGetResponseContent:
+    contactGetResponseBody:
       title: ...
       description: ...
       type: object
@@ -1103,7 +1254,7 @@ components:
           $ref: '#/components/schemas/contact'
       required:
         - data
-    contactPutResponseContent:
+    contactPutResponseBody:
       title: ...
       description: ...
       type: object
@@ -1130,7 +1281,7 @@ components:
           $ref: '#/components/schemas/contact'
       required:
         - data
-    contactPatchResponseContent:
+    contactPatchResponseBody:
       title: ...
       description: ...
       type: object
@@ -1160,6 +1311,7 @@ components:
           title: ...
           description: ...
           $ref: '#/components/schemas/id'
+          readOnly: true
         phone:
           title: ...
           description: ...
@@ -1174,7 +1326,7 @@ components:
             - Mobile
             - Other
             - Work
-    contactPhonesGetResponseContent:
+    contactPhonesGetResponseBody:
       title: ...
       description: ...
       type: object
@@ -1203,7 +1355,7 @@ components:
           $ref: '#/components/schemas/phone'
       required:
         - data
-    contactPhonesPostResponseContent:
+    contactPhonesPostResponseBody:
       title: ...
       description: ...
       type: object
@@ -1219,7 +1371,7 @@ components:
       required:
         - data
         - links
-    contactPhoneGetResponseContent:
+    contactPhoneGetResponseBody:
       title: ...
       description: ...
       type: object
@@ -1246,7 +1398,7 @@ components:
           $ref: '#/components/schemas/phone'
       required:
         - data
-    contactPhonePutResponseContent:
+    contactPhonePutResponseBody:
       title: ...
       description: ...
       type: object
@@ -1273,7 +1425,7 @@ components:
           $ref: '#/components/schemas/phone'
       required:
         - data
-    contactPhonePatchResponseContent:
+    contactPhonePatchResponseBody:
       title: ...
       description: ...
       type: object
@@ -1303,6 +1455,7 @@ components:
           title: ...
           description: ...
           $ref: '#/components/schemas/id'
+          readOnly: true
         email:
           title: ...
           description: ...
@@ -1317,7 +1470,7 @@ components:
             - Other
             - Personal
             - Work
-    contactEmailsGetResponseContent:
+    contactEmailsGetResponseBody:
       title: ...
       description: ...
       type: object
@@ -1346,7 +1499,7 @@ components:
           $ref: '#/components/schemas/email'
       required:
         - data
-    contactEmailsPostResponseContent:
+    contactEmailsPostResponseBody:
       title: ...
       description: ...
       type: object
@@ -1362,7 +1515,7 @@ components:
       required:
         - data
         - links
-    contactEmailGetResponseContent:
+    contactEmailGetResponseBody:
       title: ...
       description: ...
       type: object
@@ -1389,7 +1542,7 @@ components:
           $ref: '#/components/schemas/email'
       required:
         - data
-    contactEmailPutResponseContent:
+    contactEmailPutResponseBody:
       title: ...
       description: ...
       type: object
@@ -1416,7 +1569,7 @@ components:
           $ref: '#/components/schemas/email'
       required:
         - data
-    contactEmailPatchResponseContent:
+    contactEmailPatchResponseBody:
       title: ...
       description: ...
       type: object
