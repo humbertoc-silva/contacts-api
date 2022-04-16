@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Contacts API
-  summary: API used to manage contacts.
+  summary: API used to manage contacts and their phones and emails.
   description: ...
   termsOfService: https://example.com/terms
   contact:
@@ -16,16 +16,17 @@ servers:
   - url: https://localhost:8443/contacts/v1
     description: Local server.
   - url: https://{environment}.example.com/contacts/v1
-    description: Development and staging server.
+    description: Development, testing, and staging server.
     variables:
       environment:
         enum:
-          - development
-          - staging
-        default: development
-        descriptions: Server's environment.
+          - develop
+          - test
+          - stage
+        default: develop
+        description: Server's environment.
   - url: https://example.com/contacts/v1
-    descriptions: Production server.
+    description: Production server.
 paths:
   /contacts:
     summary: ...
@@ -48,34 +49,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactsGetResponseContent'
-              example: |
-                {
-                  "data": [
-                    {
-                      "id": 1,
-                      "firstName": "Humberto",
-                      "lastName": "Corrêa da Silva",
-                      "nickname": "humbertoc-silva",
-                      "birthday": "1986-05-30",
-                      "gender": "Male",
-                      "company": "Example",
-                      "department": "Engineering",
-                      "title": "Software Engineer",
-                      "website": "https://example.com/profile/humbertoc-silva",
-                      "notes": "A brief description about me.",
-                      "labels": ["software", "api"],
-                      "favorite": true
-                    }
-                  ],
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts?page[number]=0&page[size]=10",
-                    "first": "https://example.com/contacts/v1/contacts?page[number]=0&page[size]=10",
-                    "prev": "https://example.com/contacts/v1/contacts?page[number]=0&page[size]=10",
-                    "next": "https://example.com/contacts/v1/contacts?page[number]=1&page[size]=10",
-                    "last": "https://example.com/contacts/v1/contacts?page[number]=9&page[size]=10"
-                  }
-                }
+                $ref: '#/components/schemas/contactsResponseBody'
+              examples:
+                contactsResponseBody:
+                  $ref: '#/components/examples/contactsResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -106,24 +83,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/contactsPostRequestBody'
-            example: |
-              {
-                "data": {
-                  "firstName": "Humberto",
-                  "lastName": "Corrêa da Silva",
-                  "nickname": "humbertoc-silva",
-                  "birthday": "1986-05-30",
-                  "gender": "Male",
-                  "company": "Example",
-                  "department": "Engineering",
-                  "title": "Software Engineer",
-                  "website": "https://example.com/profile/humbertoc-silva",
-                  "notes": "A brief description about me.",
-                  "labels": ["software", "api"],
-                  "favorite": true
-                }
-              }
+              $ref: '#/components/schemas/contactRequestBody'
+            examples:
+              contactRequestBody:
+                $ref: '#/components/examples/contactRequestBody'
         required: true
       responses:
         '201':
@@ -134,28 +97,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactsPostResponseContent'
-              example: |
-                {
-                  "data": {
-                    "id": 1,
-                    "firstName": "Humberto",
-                    "lastName": "Corrêa da Silva",
-                    "nickname": "humbertoc-silva",
-                    "birthday": "1986-05-30",
-                    "gender": "Male",
-                    "company": "Example",
-                    "department": "Engineering",
-                    "title": "Software Engineer",
-                    "website": "https://example.com/profile/humbertoc-silva",
-                    "notes": "A brief description about me.",
-                    "labels": ["software", "api"],
-                    "favorite": true
-                  },
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1"
-                  }
-                }
+                $ref: '#/components/schemas/contactResponseBody'
+              examples:
+                contactResponseBody:
+                  $ref: '#/components/examples/contactResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -192,30 +137,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactGetResponseContent'
-              example: |
-                {
-                  "data": {
-                    {
-                      "id": 1,
-                      "firstName": "Humberto",
-                      "lastName": "Corrêa da Silva",
-                      "nickname": "humbertoc-silva",
-                      "birthday": "1986-05-30",
-                      "gender": "Male",
-                      "company": "Example",
-                      "department": "Engineering",
-                      "title": "Software Engineer",
-                      "website": "https://example.com/profile/humbertoc-silva",
-                      "notes": "A brief description about me.",
-                      "labels": ["software", "api"],
-                      "favorite": true
-                    }
-                  },
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1"
-                  }
-                }
+                $ref: '#/components/schemas/contactResponseBody'
+              examples:
+                contactResponseBody:
+                  $ref: '#/components/examples/contactResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -246,24 +171,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/contactPutRequestBody'
-            example: |
-              {
-                "data": {
-                  "firstName": "Humberto",
-                  "lastName": "Corrêa da Silva",
-                  "nickname": "humbertoc-silva",
-                  "birthday": "1986-05-30",
-                  "gender": "Male",
-                  "company": "Example",
-                  "department": "Engineering",
-                  "title": "Software Engineer",
-                  "website": "https://example.com/profile/humbertoc-silva",
-                  "notes": "A brief description about me.",
-                  "labels": ["software", "api"],
-                  "favorite": true
-                }
-              }
+              $ref: '#/components/schemas/contactRequestBody'
+            examples:
+              contactRequestBody:
+                $ref: '#/components/examples/contactRequestBody'
         required: true
       responses:
         '200':
@@ -271,28 +182,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactPutResponseContent'
-              example: |
-                {
-                  "data": {
-                    "id": 1,
-                    "firstName": "Humberto",
-                    "lastName": "Corrêa da Silva",
-                    "nickname": "humbertoc-silva",
-                    "birthday": "1986-05-30",
-                    "gender": "Male",
-                    "company": "Example",
-                    "department": "Engineering",
-                    "title": "Software Engineer",
-                    "website": "https://example.com/profile/humbertoc-silva",
-                    "notes": "A brief description about me.",
-                    "labels": ["software", "api"],
-                    "favorite": true
-                  },
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1"
-                  }
-                }
+                $ref: '#/components/schemas/contactResponseBody'
+              examples:
+                contactResponseBody:
+                  $ref: '#/components/examples/contactResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -355,13 +248,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/contactPatchRequestBody'
-            example: |
-              {
-                "data": {
-                  "firstName": "Humberto"
-                }
-              }
+              $ref: '#/components/schemas/contactRequestBody'
+            examples:
+              contactPatchRequestBody:
+                $ref: '#/components/examples/contactPatchRequestBody'
         required: true
       responses:
         '200':
@@ -369,28 +259,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactPatchResponseContent'
-              example: |
-                {
-                  "data": {
-                    "id": 1,
-                    "firstName": "Humberto",
-                    "lastName": "Corrêa da Silva",
-                    "nickname": "humbertoc-silva",
-                    "birthday": "1986-05-30",
-                    "gender": "Male",
-                    "company": "Example",
-                    "department": "Engineering",
-                    "title": "Software Engineer",
-                    "website": "https://example.com/profile/humbertoc-silva",
-                    "notes": "A brief description about me.",
-                    "labels": ["software", "api"],
-                    "favorite": true
-                  },
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1"
-                  }
-                }
+                $ref: '#/components/schemas/contactResponseBody'
+              examples:
+                contactResponseBody:
+                  $ref: '#/components/examples/contactResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -436,25 +308,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactPhonesGetResponseContent'
-              example: |
-                {
-                  "data": [
-                    {
-                      "id": 1,
-                      "contactId": 1,
-                      "phone": "5511999999999",
-                      "label": "Mobile"
-                    }
-                  ],
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1/phones?page[number]=0&page[size]=10",
-                    "first": "https://example.com/contacts/v1/contacts/1/phones?page[number]=0&page[size]=10",
-                    "prev": "https://example.com/contacts/v1/contacts/1/phones?page[number]=0&page[size]=10",
-                    "next": "https://example.com/contacts/v1/contacts/1/phones?page[number]=1&page[size]=10",
-                    "last": "https://example.com/contacts/v1/contacts/1/phones?page[number]=9&page[size]=10"
-                  }
-                }
+                $ref: '#/components/schemas/contactPhonesResponseBody'
+              examples:
+                contactPhonesResponseBody:
+                  $ref: '#/components/examples/contactPhonesResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -485,14 +342,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/contactPhonesPostRequestBody'
-            example: |
-              {
-                "data": {
-                    "phone": "5511999999999",
-                    "label": "Mobile"
-                  }
-              }
+              $ref: '#/components/schemas/contactPhoneRequestBody'
+            examples:
+              contactPhoneRequestBody:
+                $ref: '#/components/examples/contactPhoneRequestBody'
         required: true
       responses:
         '201':
@@ -503,19 +356,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactPhonesPostResponseContent'
-              example: |
-                {
-                  "data": {
-                    "id": 1,
-                    "contactId": 1,
-                    "phone": "5511999999999",
-                    "label": "Mobile"
-                  },
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1/phones/1"
-                  }
-                }
+                $ref: '#/components/schemas/contactPhoneResponseBody'
+              examples:
+                contactPhoneResponseBody:
+                  $ref: '#/components/examples/contactPhoneResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -554,19 +398,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactPhoneGetResponseContent'
-              example: |
-                {
-                  "data": {
-                    "id": 1,
-                    "contactId": 1,
-                    "phone": "5511999999999",
-                    "label": "Mobile"
-                  },
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1/phones/1"
-                  }
-                }
+                $ref: '#/components/schemas/contactPhoneResponseBody'
+              examples:
+                contactPhoneResponseBody:
+                  $ref: '#/components/examples/contactPhoneResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -597,14 +432,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/contactPhonePutRequestBody'
-            example: |
-              {
-                "data": {
-                  "phone": "5511999999999",
-                  "label": "Mobile"
-                }
-              }
+              $ref: '#/components/schemas/contactPhoneRequestBody'
+            examples:
+              contactPhoneRequestBody:
+                $ref: '#/components/examples/contactPhoneRequestBody'
         required: true
       responses:
         '200':
@@ -612,19 +443,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactPhonePutResponseContent'
-              example: |
-                {
-                  "data": {
-                    "id": 1,
-                    "contactId": 1,
-                    "phone": "5511999999999",
-                    "label": "Mobile"
-                  },
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1/phones/1"
-                  }
-                }
+                $ref: '#/components/schemas/contactPhoneResponseBody'
+              examples:
+                contactPhoneResponseBody:
+                  $ref: '#/components/examples/contactPhoneResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -687,13 +509,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/contactPhonePatchRequestBody'
-            example: |
-              {
-                "data": {
-                  "phone": "5511999999999"
-                }
-              }
+              $ref: '#/components/schemas/contactPhoneRequestBody'
+            examples:
+              contactPhonePatchRequestBody:
+                $ref: '#/components/examples/contactPhonePatchRequestBody'
         required: true
       responses:
         '200':
@@ -701,19 +520,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactPhonePatchResponseContent'
-              example: |
-                {
-                  "data": {
-                    "id": 1,
-                    "contactId": 1,
-                    "phone": "5511999999999",
-                    "label": "Mobile"
-                  },
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1/phones/1"
-                  }
-                }
+                $ref: '#/components/schemas/contactPhoneResponseBody'
+              examples:
+                contactPhoneResponseBody:
+                  $ref: '#/components/examples/contactPhoneResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -1182,7 +992,7 @@ components:
           title: ...
           description: ...
           type: boolean
-    contactsGetResponseBody:
+    contactsResponseBody:
       title: ...
       description: ...
       type: object
@@ -1200,7 +1010,7 @@ components:
       required:
         - data
         - links
-    contactsPostRequestBody:
+    contactRequestBody:
       title: ...
       description: ...
       type: object
@@ -1211,77 +1021,7 @@ components:
           $ref: '#/components/schemas/contact'
       required:
         - data
-    contactsPostResponseBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/contact'
-        links:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/links'
-      required:
-        - data
-        - links
-    contactGetResponseBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/contact'
-        links:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/links'
-      required:
-        - data
-        - links
-    contactPutRequestBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/contact'
-      required:
-        - data
-    contactPutResponseBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/contact'
-        links:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/links'
-      required:
-        - data
-        - links
-    contactPatchRequestBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/contact'
-      required:
-        - data
-    contactPatchResponseBody:
+    contactResponseBody:
       title: ...
       description: ...
       type: object
@@ -1326,7 +1066,7 @@ components:
             - Mobile
             - Other
             - Work
-    contactPhonesGetResponseBody:
+    contactPhonesResponseBody:
       title: ...
       description: ...
       type: object
@@ -1344,7 +1084,7 @@ components:
       required:
         - data
         - links
-    contactPhonesPostRequestBody:
+    contactPhoneRequestBody:
       title: ...
       description: ...
       type: object
@@ -1355,77 +1095,7 @@ components:
           $ref: '#/components/schemas/phone'
       required:
         - data
-    contactPhonesPostResponseBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/phone'
-        links:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/links'
-      required:
-        - data
-        - links
-    contactPhoneGetResponseBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/phone'
-        links:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/links'
-      required:
-        - data
-        - links
-    contactPhonePutRequestBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/phone'
-      required:
-        - data
-    contactPhonePutResponseBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/phone'
-        links:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/links'
-      required:
-        - data
-        - links
-    contactPhonePatchRequestBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/phone'
-      required:
-        - data
-    contactPhonePatchResponseBody:
+    contactPhoneResponseBody:
       title: ...
       description: ...
       type: object
@@ -1651,6 +1321,144 @@ components:
       schema:
         $ref: '#/components/schemas/id'
       example: 1
+  examples:
+    contactsResponseBody:
+      summary: ...
+      description: ...
+      value: |
+        {
+          "data": [
+            {
+              "id": 1,
+              "firstName": "Humberto",
+              "lastName": "Corrêa da Silva",
+              "nickname": "humbertoc-silva",
+              "birthday": "1999-09-09",
+              "gender": "Male",
+              "company": "Example",
+              "department": "Engineering",
+              "title": "Software Engineer",
+              "website": "https://example.com/profile/humbertoc-silva",
+              "notes": "A brief description about me.",
+              "labels": ["software", "api"],
+              "favorite": true
+            }
+          ],
+          "links": {
+            "self": "https://example.com/contacts/v1/contacts?page[number]=0&page[size]=10",
+            "first": "https://example.com/contacts/v1/contacts?page[number]=0&page[size]=10",
+            "prev": "https://example.com/contacts/v1/contacts?page[number]=0&page[size]=10",
+            "next": "https://example.com/contacts/v1/contacts?page[number]=1&page[size]=10",
+            "last": "https://example.com/contacts/v1/contacts?page[number]=9&page[size]=10"
+          }
+        }
+    contactRequestBody:
+      summary: ...
+      description: ...
+      value: |
+        {
+          "data": {
+            "firstName": "Humberto",
+            "lastName": "Corrêa da Silva",
+            "nickname": "humbertoc-silva",
+            "birthday": "1999-09-09",
+            "gender": "Male",
+            "company": "Example",
+            "department": "Engineering",
+            "title": "Software Engineer",
+            "website": "https://example.com/profile/humbertoc-silva",
+            "notes": "A brief description about me.",
+            "labels": ["software", "api"],
+            "favorite": true
+          }
+        }
+    contactPatchRequestBody:
+      summary: ...
+      description: ...
+      value: |
+        {
+          "data": {
+            "firstName": "Humberto"
+          }
+        }
+    contactResponseBody:
+      summary: ...
+      description: ...
+      value: | 
+        {
+          "data": {
+            "id": 1,
+            "firstName": "Humberto",
+            "lastName": "Corrêa da Silva",
+            "nickname": "humbertoc-silva",
+            "birthday": "1999-09-09",
+            "gender": "Male",
+            "company": "Example",
+            "department": "Engineering",
+            "title": "Software Engineer",
+            "website": "https://example.com/profile/humbertoc-silva",
+            "notes": "A brief description about me.",
+            "labels": ["software", "api"],
+            "favorite": true
+          },
+          "links": {
+            "self": "https://example.com/contacts/v1/contacts/1"
+          }
+    contactPhonesResponseBody:
+      summary: ...
+      description: ...
+      value: |
+        {
+          "data": [
+            {
+              "id": 1,
+              "contactId": 1,
+              "phone": "5511999999999",
+              "label": "Mobile"
+            }
+          ],
+          "links": {
+            "self": "https://example.com/contacts/v1/contacts/1/phones?page[number]=0&page[size]=10",
+            "first": "https://example.com/contacts/v1/contacts/1/phones?page[number]=0&page[size]=10",
+            "prev": "https://example.com/contacts/v1/contacts/1/phones?page[number]=0&page[size]=10",
+            "next": "https://example.com/contacts/v1/contacts/1/phones?page[number]=1&page[size]=10",
+            "last": "https://example.com/contacts/v1/contacts/1/phones?page[number]=9&page[size]=10"
+          }
+        }
+    contactPhoneRequestBody:
+      summary: ...
+      description: ...
+      value: |
+        {
+          "data": {
+              "phone": "5511999999999",
+              "label": "Mobile"
+            }
+        }
+    contactPhonePatchRequestBody:
+      summary: ...
+      description: ...
+      value: |
+        {
+          "data": {
+            "phone": "5511999999999"
+          }
+        }
+    contactPhoneResponseBody:
+      summary: ...
+      description: ...
+      value: |
+        {
+          "data": {
+            "id": 1,
+            "contactId": 1,
+            "phone": "5511999999999",
+            "label": "Mobile"
+          },
+          "links": {
+            "self": "https://example.com/contacts/v1/contacts/1/phones/1"
+          }
+        }
   headers:
     location:
       description: ...
