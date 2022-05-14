@@ -570,25 +570,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactEmailsGetResponseContent'
-              example: |
-                {
-                  "data": [
-                    {
-                      "id": 1,
-                      "contactId": 1,
-                      "email": "humbertoc-silva@example.com",
-                      "label": "Personal"
-                    }
-                  ],
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1/emails?page[number]=0&page[size]=10",
-                    "first": "https://example.com/contacts/v1/contacts/1/emails?page[number]=0&page[size]=10",
-                    "prev": "https://example.com/contacts/v1/contacts/1/emails?page[number]=0&page[size]=10",
-                    "next": "https://example.com/contacts/v1/contacts/1/emails?page[number]=1&page[size]=10",
-                    "last": "https://example.com/contacts/v1/contacts/1/emails?page[number]=9&page[size]=10"
-                  }
-                }
+                $ref: '#/components/schemas/contactEmailsResponseBody'
+              examples:
+                contactEmailsResponseBody:
+                  $ref: '#/components/examples/contactEmailsResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -619,14 +604,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/contactEmailsPostRequestBody'
-            example: |
-              {
-                "data": {
-                  "email": "humbertoc-silva@example.com",
-                  "label": "Personal"
-                }
-              }
+              $ref: '#/components/schemas/contactEmailRequestBody'
+            examples:
+              contactEmailRequestBody:
+                $ref: '#/components/examples/contactEmailRequestBody'
+              
         required: true
       responses:
         '201':
@@ -637,19 +619,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactEmailsPostResponseContent'
-              example: |
-                {
-                  "data": {
-                    "id": 1,
-                    "contactId": 1,
-                    "email": "humbertoc-silva@example.com",
-                    "label": "Personal"
-                  },
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1/emails/1"
-                  }
-                }
+                $ref: '#/components/schemas/contactEmailResponseBody'
+              examples:
+                contactEmailResponseBody:
+                  $ref: '#/components/examples/contactEmailResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -688,19 +661,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactEmailGetResponseContent'
-              example: |
-                {
-                  "data": {
-                    "id": 1,
-                    "contactId": 1,
-                    "email": "humbertoc-silva@example.com",
-                    "label": "Personal"
-                  },
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1/emails/1"
-                  }
-                }
+                $ref: '#/components/schemas/contactEmailResponseBody'
+              examples:
+                contactEmailResponseBody:
+                  $ref: '#/components/examples/contactEmailResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -731,14 +695,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/contactEmailPutRequestBody'
-            example: |
-              {
-                "data": {
-                  "email": "humbertoc-silva@example.com",
-                  "label": "Personal"
-                }
-              }
+              $ref: '#/components/schemas/contactEmailRequestBody'
+            examples:
+              contactEmailRequestBody:
+                $ref: '#/components/examples/contactEmailRequestBody'
         required: true
       responses:
         '200':
@@ -746,19 +706,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactEmailPutResponseContent'
-              example: |
-                {
-                  "data": {
-                    "id": 1,
-                    "contactId": 1,
-                    "email": "humbertoc-silva@example.com",
-                    "label": "Personal"
-                  },
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1/emails/1"
-                  }
-                }
+                $ref: '#/components/schemas/contactEmailResponseBody'
+              examples:
+                contactEmailResponseBody:
+                  $ref: '#/components/examples/contactEmailResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -1140,7 +1091,7 @@ components:
             - Other
             - Personal
             - Work
-    contactEmailsGetResponseBody:
+    contactEmailsResponseBody:
       title: ...
       description: ...
       type: object
@@ -1158,7 +1109,7 @@ components:
       required:
         - data
         - links
-    contactEmailsPostRequestBody:
+    contactEmailRequestBody:
       title: ...
       description: ...
       type: object
@@ -1169,77 +1120,7 @@ components:
           $ref: '#/components/schemas/email'
       required:
         - data
-    contactEmailsPostResponseBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/email'
-        links:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/links'
-      required:
-        - data
-        - links
-    contactEmailGetResponseBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/email'
-        links:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/links'
-      required:
-        - data
-        - links
-    contactEmailPutRequestBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/email'
-      required:
-        - data
-    contactEmailPutResponseBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/email'
-        links:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/links'
-      required:
-        - data
-        - links
-    contactEmailPatchRequestBody:
-      title: ...
-      description: ...
-      type: object
-      properties:
-        data:
-          title: ...
-          description: ...
-          $ref: '#/components/schemas/email'
-      required:
-        - data
-    contactEmailPatchResponseBody:
+    contactEmailResponseBody:
       title: ...
       description: ...
       type: object
@@ -1457,6 +1338,52 @@ components:
           },
           "links": {
             "self": "https://example.com/contacts/v1/contacts/1/phones/1"
+          }
+        }
+    contactEmailsResponseBody:
+      summary: ...
+      description: ...
+      value: |
+        {
+          "data": [
+            {
+              "id": 1,
+              "contactId": 1,
+              "email": "humbertoc-silva@example.com",
+              "label": "Personal"
+            }
+          ],
+          "links": {
+            "self": "https://example.com/contacts/v1/contacts/1/emails?page[number]=0&page[size]=10",
+            "first": "https://example.com/contacts/v1/contacts/1/emails?page[number]=0&page[size]=10",
+            "prev": "https://example.com/contacts/v1/contacts/1/emails?page[number]=0&page[size]=10",
+            "next": "https://example.com/contacts/v1/contacts/1/emails?page[number]=1&page[size]=10",
+            "last": "https://example.com/contacts/v1/contacts/1/emails?page[number]=9&page[size]=10"
+          }
+        }
+    contactEmailRequestBody:
+      summary: ...
+      description: ...
+      value: |
+        {
+          "data": {
+            "email": "humbertoc-silva@example.com",
+            "label": "Personal"
+          }
+        }
+    contactEmailResponseBody:
+      summary: ...
+      description: ...
+      value: |
+        {
+          "data": {
+            "id": 1,
+            "contactId": 1,
+            "email": "humbertoc-silva@example.com",
+            "label": "Personal"
+          },
+          "links": {
+            "self": "https://example.com/contacts/v1/contacts/1/emails/1"
           }
         }
   headers:
