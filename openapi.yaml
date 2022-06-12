@@ -772,13 +772,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/contactEmailPatchRequestBody'
-            example: |
-              {
-                "data": {
-                  "email": "humbertoc-silva@example.com"
-                }
-              }
+              $ref: '#/components/schemas/contactEmailRequestBody'
+            examples:
+              contactEmailPatchRequestBody:
+                $ref: '#/components/examples/contactEmailPatchRequestBody'
         required: true
       responses:
         '200':
@@ -786,19 +783,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/contactEmailPatchResponseContent'
-              example: |
-                {
-                  "data": {
-                    "id": 1,
-                    "contactId": 1,
-                    "email": "humbertoc-silva@example.com",
-                    "label": "Personal"
-                  },
-                  "links": {
-                    "self": "https://example.com/contacts/v1/contacts/1/emails/1"
-                  }
-                }
+                $ref: '#/components/schemas/contactEmailResponseBody'
+              examples:
+                contactEmailResponseBody:
+                  $ref: '#/components/examples/contactEmailResponseBody'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -1371,6 +1359,15 @@ components:
             "label": "Personal"
           }
         }
+    contactEmailPatchRequestBody:
+      summary: ...
+      description: ...
+      value: |
+        {
+          "data": {
+            "email": "humbertoc-silva@example.com"
+          }
+        }
     contactEmailResponseBody:
       summary: ...
       description: ...
@@ -1392,3 +1389,30 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/uri'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      description: ...
+      name: X-API-Key
+      in: header
+security:
+  - api_key: []
+tags:
+  - name: contacts
+    description: ...
+    externalDocs:
+      description: ...
+      url: https://example.com/docs/contacts/v1/tags/contacts
+  - name: contact-phones
+    description: ...
+    externalDocs:
+      description: ...
+      url: https://example.com/docs/contacts/v1/tags/contact-phones
+  - name: contact-email
+    description: ...
+    externalDocs:
+      description: ...
+      url: https://example.com/docs/contacts/v1/tags/contact-email 
+externalDocs:
+  description: ...
+  url: https://example.com/docs/contacts/v1
