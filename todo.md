@@ -1,5 +1,4 @@
 # TODO list
-- Definir os métodos de segurança da API (basic auth)
-- Definir schemas para os erros 4xx e 5xx
+- Definir o método de segurança da API: basic auth
+- Definir os headers da resposta 401
 - Preecher summary e description
-

@@ -1124,6 +1124,33 @@ components:
       required:
         - data
         - links
+    httpError:
+      title: ...
+      description: ...
+      type: object
+      properties:
+        message:
+          title: ...
+          description: ...
+          type: string
+        statusCode:
+          title: ...
+          description: ...
+          type: integer
+          format: int32
+        statusText:
+          title: ...
+          description: ...
+          type: string
+        timestamp:
+          title: ...
+          description: ...
+          type: string
+          format: date-time
+      required:
+        - statusCode
+        - statusText
+        - timestamp
   responses:
     '202':
       description: Accepted
@@ -1131,26 +1158,147 @@ components:
       description: No Content
     '400':
       description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError'
+          example: |
+            {
+              "message": "Error message",
+              "statusCode": 400,
+              "statusText": "Bad Request",
+              "timestamp": "1970-01-01T00:00:00Z"
+            }
     '401':
       description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError'
+          example: |
+            {
+              "message": "Error message",
+              "statusCode": 401,
+              "statusText": "Unauthorized",
+              "timestamp": "1970-01-01T00:00:00Z"
+            }
     '403':
       description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError'
+          example: |
+            {
+              "message": "Error message",
+              "statusCode": 403,
+              "statusText": "Forbidden",
+              "timestamp": "1970-01-01T00:00:00Z"
+            }
     '404':
       description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError'
+          example: |
+            {
+              "message": "Error message",
+              "statusCode": 404,
+              "statusText": "Not Found",
+              "timestamp": "1970-01-01T00:00:00Z"
+            }
     '405':
       description: Method Not Allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError'
+          example: |
+            {
+              "message": "Error message",
+              "statusCode": 405,
+              "statusText": "Method Not Allowed",
+              "timestamp": "1970-01-01T00:00:00Z"
+            }
     '406':
       description: Not Acceptable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError'
+          example: |
+            {
+              "message": "Error message",
+              "statusCode": 406,
+              "statusText": "Not Acceptable",
+              "timestamp": "1970-01-01T00:00:00Z"
+            }
     '409':
       description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError'
+          example: |
+            {
+              "message": "Error message",
+              "statusCode": 409,
+              "statusText": "Conflict",
+              "timestamp": "1970-01-01T00:00:00Z"
+            }
     '415':
       description: Unsupported Media Type
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError'
+          example: |
+            {
+              "message": "Error message",
+              "statusCode": 415,
+              "statusText": "Unsupported Media Type",
+              "timestamp": "1970-01-01T00:00:00Z"
+            }
     '422':
       description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError'
+          example: |
+            {
+              "message": "Error message",
+              "statusCode": 422,
+              "statusText": "Unprocessable Entity",
+              "timestamp": "1970-01-01T00:00:00Z"
+            }
     '500':
       description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError'
+          example: |
+            {
+              "message": "Error message",
+              "statusCode": 500,
+              "statusText": "Internal Server Error",
+              "timestamp": "1970-01-01T00:00:00Z"
+            }
     '503':
       description: Service Unavailable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/httpError'
+          example: |
+            {
+              "message": "Error message",
+              "statusCode": 503,
+              "statusText": "Service Unavailable",
+              "timestamp": "1970-01-01T00:00:00Z"
+            }
   parameters:
     pageNumber:
       name: page[number]
