@@ -1171,6 +1171,9 @@ components:
             }
     '401':
       description: Unauthorized
+      headers:
+        www-authenticate:
+          $ref: '#/components/headers/www-authenticate'
       content:
         application/json:
           schema:
@@ -1537,14 +1540,28 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/uri'
+      example: https://example.com/contacts/v1/contacts/1
+    www-authenticate:
+      description: ...
+      required: true
+      schema:
+        title: ...
+        description: ...
+        type: string
+      example: Basic realm="contacts"
   securitySchemes:
     apiKey:
       type: apiKey
       description: ...
       name: X-API-Key
       in: header
+    httpBasic:
+      type: http
+      description: ...
+      scheme: basic
 security:
-  - api_key: []
+  - apiKey: []
+  - httpBasic: []
 tags:
   - name: contacts
     description: ...
